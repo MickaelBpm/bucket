@@ -7,7 +7,12 @@
 {% block body %}
     <article>
         {% for wish in wishes %}
-            <a class="lien" class="form" href="{{ path('wish_show', {'id': wish.id})}}" alt="wish.title">{{ wish.title }} </a><br>
+            <a class="lien" class="form" class="box1" href="{{ path('wish_show', {'id': wish.id})}}" alt="wish.title">
+                La catégorie : {{ wish.categorys.name }}
+                <br>
+                Le souhait : {{ wish.title }}.
+            </a>
+                 <br><br>
         {% endfor %}
 
     </article>

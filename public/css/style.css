@@ -71,3 +71,8 @@ footer {
     align-items: center;
     justify-content: center;
 }
+
+.box1{
+    border: 2px solid black;
+    border-radius: 10px;
+}

@@ -2,13 +2,19 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Wish;
+use App\Repository\CategoryRepository;
+use App\Repository\WishRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 
 class AddWishType extends AbstractType
@@ -20,7 +26,13 @@ class AddWishType extends AbstractType
             ->add('description', TextareaType::class, [
                 'label' => 'Decris ton souhait'
             ])
-            ->add('author', TextType::class);
+            ->add('author', TextType::class)
+            ->add('categorys', EntityType::class,[
+                //on va chercher la classe à associer
+                'class'=>Category::class,
+                    'choice_label'=>'name',
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
