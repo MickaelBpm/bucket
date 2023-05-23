@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="lampe">
+        <h3>Faites votre souhait</h3>
+
+        <img class="photo2" src="{{ asset('img/smoke-exists-from-magic-aladdin-2981743.jpg') }}" alt="lampe magique">
+
+        {{form_start(wishForm) }}
+
+        {{ form_widget(wishForm) }}
+
+        <button>Ajouter le souhait</button>
+        <br>
+        {{ form_end(wishForm) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <br>
+    <br>
+
+    <div class="lampe">
+        <h2>Bienvenue {{ pseudo }} !</h2>
+        <p>Félicitation, tu as trouvé la grotte</p>
+        <a href="{{ path('main_lampe') }}">Lampe magique</a>
+        <br>
+        <br>
+        <img src="{{ asset('img/60bb6d0463729a052129fd4c5cf5fae9.jpg') }}" alt="la grotte">
+    </div>
+{% endblock %}
+
+{% block title %}
+    {{ parent() }} | Accueil
+{% endblock %}

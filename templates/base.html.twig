@@ -1,19 +1,50 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %} Bucket-List {% endblock %}</title>
+    <link rel="icon" href="{{ asset('img/favicon.png') }}">
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@1,500&family=Noto+Sans+JP:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="wrapper">
+            <header>
+                <h1>
+                    Bucket-List
+                    <a href="{{ path('main_home') }}">
+                        <img class="icone" src="{{ asset('img/logo.svg') }}" alt="bucket-list"></a>
+                </h1>
+                {{ include('menu/nav.html.twig') }}
+
+                {% for label, messages in app.flashes() %}
+                    {% for message in messages %}
+                        <div class="flash flash-{{ label }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+            </header>
+            <br>
+            <main>
+                {% block body %}
+
+                {% endblock %}
+            </main>
+
+            <footer>
+                <p>&copy;Bucket-List {{ "now" | date('Y') }}</p>
+            </footer>
+        </div>
+    </div>
+</body>
 </html>
