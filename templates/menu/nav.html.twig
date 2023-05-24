@@ -3,6 +3,16 @@
         <li><a href="{{ path('main_home') }}">Accueil</a></li>
         <li><a href="{{ path('main_aboutUs') }}">About us</a></li>
         <li><a href="{{ path('wish_list') }}">Liste d'idées</a></li>
+
+        {% if app.user %}
+        <li><a href="{{ path('app_logout') }}">Logout : {{ app.user.firstname }}</a></li>
+
+        {% else %}
+        <li><a href="{{ path('app_login') }}">Login</a></li>
+        <li><a href="{{ path('app_register') }}">Register</a></li>
+
+        {% endif %}
+
     </ul>
 
 </nav>

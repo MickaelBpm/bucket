@@ -5,7 +5,12 @@
     <br>
 
     <div class="lampe">
-        <h2>Bienvenue {{ pseudo }} !</h2>
+        <h2>Bienvenue
+            {% if app.user %}
+            {{ app.user.firstname }} !</h2>
+            {% else %}
+            !
+            {% endif %}
         <p>Félicitation, tu as trouvé la grotte</p>
         <a href="{{ path('main_lampe') }}">Lampe magique</a>
         <br>

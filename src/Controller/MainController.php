@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Wish;
 use App\Form\AddWishType;
 use App\Repository\WishRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,10 +26,13 @@ class MainController extends AbstractController
         ]);
     }
 
+    #[IsGranted ('ROLE_USER')]
     #[Route('/lampe', name: 'main_lampe')]
     public function lampe(Request $request, WishRepository $wishRepository): Response
     {
+        $author = $this->getUser()->getFirstname();
         $wish = new Wish();
+        $wish->setAuthor($author);
 
         $wishform = $this -> createForm(AddWishType::class, $wish);
 
