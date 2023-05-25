@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Wish;
 use App\Form\AddWishType;
 use App\Repository\WishRepository;
+use App\Tools\Censurator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -28,9 +29,9 @@ class MainController extends AbstractController
 
     #[IsGranted ('ROLE_USER')]
     #[Route('/lampe', name: 'main_lampe')]
-    public function lampe(Request $request, WishRepository $wishRepository): Response
+    public function lampe(Request $request, WishRepository $wishRepository, Censurator $censurator): Response
     {
-        $author = $this->getUser()->getFirstname();
+        $author = $this->getUser()->getUserIdentifier();
         $wish = new Wish();
         $wish->setAuthor($author);
 
@@ -43,6 +44,18 @@ class MainController extends AbstractController
 //            $wish->setDateCreated(new \DateTime());
 //            $wish->setIsPublished(true);
             //Une façon de mettre des valeurs par défauts
+
+            //Deux manières pour changer la description
+            //Premiere qui est smart
+            $wish->setDescription($censurator->purify($wish->getDescription()));
+            $wish->setTitle($censurator->purify($wish->getTitle()));
+
+            //Deuxième
+//            $description = $wish->getDescription();
+//            // Utilisation de la fonction purify
+//            $newDescription = $censurator->purify($description);
+//
+//            $wish->setDescription($newDescription);
 
             $wishRepository->save($wish, true);
 
